@@ -8,7 +8,7 @@
         }
     },
     "variables":{
-        "webappName": "[concat(parameters('environmentName'), 'simpleaspnetcoreapp')]",
+        "webappName": "[concat(parameters('environmentName'), 'aspnetcoreapp')]",
         "appServicePlanName":"[concat(parameters('environmentName'), 'linuxplan')]"
     },
     "resources":[  
@@ -18,7 +18,10 @@
            "name": "[variables('webappName')]",
            "location": "[resourceGroup().location]",
            "properties":{
-               "serverFarmId": "[variables('appServicePlanName')]"
+               "serverFarmId": "[variables('appServicePlanName')]",
+               "siteConfig":{
+                   "linuxFxVersion": "[concat('DOCKER|',parameters('environmentName'),'acr.azurecr.io/aspnetcoreapp:1')]"
+               }
            },
            "kind": "app,linux"
        }

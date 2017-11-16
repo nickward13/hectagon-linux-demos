@@ -33,12 +33,12 @@
         },
         {
             "apiVersion": "2017-05-10",
-            "name": "simpleaspnetcoreapp",
+            "name": "aspnetcoreapp",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(parameters('githuburl'),'simpleaspnetcoreapp.json')]",
+                    "uri": "[concat(parameters('githuburl'),'aspnetcoreapp.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters":{
