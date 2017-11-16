@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "environmentName": {
+            "type": "string",
+            "defaultValue": "hectagon"
+        },
+        "githuburl": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/nickward13/hectagon-linux-demos/master/"
+        }
+    },
+    "variables": {
+        "acrname": "[concat(parameters('environmentName'),'acr')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "acrLinkedTemplate",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('githuburl'),'linuxappserviceplan.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters":{
+                    "environmentName": {
+                        "value": "[parameters('environmentName')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+      
+    }
+  }
