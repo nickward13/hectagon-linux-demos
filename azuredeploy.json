@@ -16,7 +16,7 @@
     "resources": [
         {
             "apiVersion": "2017-05-10",
-            "name": "acrLinkedTemplate",
+            "name": "linuxappserviceplan",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
@@ -30,6 +30,26 @@
                     }
                 }
             }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "simpleaspnetcoreapp",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('githuburl'),'simpleaspnetcoreapp.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters":{
+                    "environmentName": {
+                        "value": "[parameters('environmentName')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "Microsoft.Resources/deployments/linuxappserviceplan"
+            ]
         }
     ],
     "outputs": {

@@ -1,0 +1,26 @@
+{  
+    "$schema":"http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion":"1.0.0.0",
+    "parameters": {
+        "environmentName": {
+            "type": "string",
+            "defaultValue": "hectagon"
+        }
+    },
+    "variables":{
+        "webappName": "[concat(parameters('environmentName'), 'simpleaspnetcoreapp')]",
+        "appServicePlanName":"[concat(parameters('environmentName'), 'linuxplan')]"
+    },
+    "resources":[  
+       {
+           "apiVersion": "2016-08-01",
+           "type": "Microsoft.Web/sites",
+           "name": "[variables('webappName')]",
+           "location": "[resourceGroup().location]",
+           "properties":{
+               "serverFarmId": "[variables('appServicePlanName')]"
+           },
+           "kind": "app,linux"
+       }
+    ]
+ }
