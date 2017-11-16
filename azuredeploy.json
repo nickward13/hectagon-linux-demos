@@ -12,7 +12,6 @@
         }
     },
     "variables": {
-        "acrname": "[concat(parameters('environmentName'),'acr')]"
     },
     "resources": [
         {
