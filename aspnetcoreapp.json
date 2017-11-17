@@ -12,8 +12,7 @@
         "appServicePlanName":"[concat(parameters('environmentName'), 'linuxplan')]",
         "dockerCustomImageName": "[concat(parameters('environmentName'), 'acr.azurecr.io/aspnetcoreapp:1')]",
         "dockerRegistryServerUrl": "[concat(parameters('environmentName'), 'acr.azurecr.io')]",
-        "dockerRegistryUsername": "[concat(parameters('environmentName'), 'acr')]",
-        "dockerRegistryPassword": "[listKeys(resourceId('Microsoft.ContainerRegistry/registries', concat(parameters('environmentname'), 'acr')), '2017-03-01').passwords[0].value]"
+        "dockerRegistryUsername": "[concat(parameters('environmentName'), 'acr')]"
     },
     "resources":[  
        {
@@ -39,7 +38,7 @@
                     },
                     {
                         "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
-                        "value": "[variables('dockerRegistryPassword')]"
+                        "value": "[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', concat(parameters('environmentname'), 'acr')), '2017-03-01').passwords[0].value]"
                     }
                 ]
 
