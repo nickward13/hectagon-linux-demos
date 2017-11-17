@@ -20,7 +20,8 @@
            "properties":{
                "serverFarmId": "[variables('appServicePlanName')]",
                "siteConfig":{
-                   "linuxFxVersion": "[concat('DOCKER|',parameters('environmentName'),'acr.azurecr.io/aspnetcoreapp:1')]"
+                   "linuxFxVersion": "[concat('DOCKER|',parameters('environmentName'),'acr.azurecr.io/aspnetcoreapp:1')]",
+                   "remoteDebuggingVersion": "VS2012"
                }
            },
            "kind": "app,linux"
