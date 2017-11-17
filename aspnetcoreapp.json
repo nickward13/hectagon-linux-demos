@@ -9,7 +9,11 @@
     },
     "variables":{
         "webappName": "[concat(parameters('environmentName'), 'aspnetcoreapp')]",
-        "appServicePlanName":"[concat(parameters('environmentName'), 'linuxplan')]"
+        "appServicePlanName":"[concat(parameters('environmentName'), 'linuxplan')]",
+        "dockerCustomImageName": "[concat(parameters('environmentName'), 'acr.azurecr.io/aspnetcoreapp:1')]",
+        "dockerRegistryServerUrl": "[concat(parameters('environmentName'), 'acr.azurecr.io')]",
+        "dockerRegistryUsername": "[concat(parameters('environmentName'), 'acr')]",
+        "dockerRegistryPassword": "[listKeys(resourceId('Microsoft.ContainerRegistry/registries', concat(parameters('environmentname'), 'acr')), '2017-03-01').passwords[0].value]"
     },
     "resources":[  
        {
@@ -20,11 +24,28 @@
            "properties":{
                "serverFarmId": "[variables('appServicePlanName')]",
                "siteConfig":{
-                   "linuxFxVersion": "[concat('DOCKER|',parameters('environmentName'),'acr.azurecr.io/aspnetcoreapp:1')]",
-                   "remoteDebuggingVersion": "VS2012"
+                "appSettings": [
+                    {
+                        "name": "DOCKER_CUSTOM_IMAGE_NAME",
+                        "value": "[variables('dockerCustomImageName')]"
+                    },
+                    {
+                        "name": "DOCKER_REGISTRY_SERVER_URL",
+                        "value": "[variables('dockerRegistryServerUrl')]"
+                    },
+                    {
+                        "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                        "value": "[variables('dockerRegistryUsername')]"
+                    },
+                    {
+                        "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                        "value": "[variables('dockerRegistryPassword')]"
+                    }
+                ]
+
                }
            },
-           "kind": "app,linux"
+           "kind": "app"
        }
     ]
  }
