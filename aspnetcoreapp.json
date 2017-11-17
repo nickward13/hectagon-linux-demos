@@ -38,7 +38,7 @@
                     },
                     {
                         "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
-                        "value": "[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', concat(parameters('environmentname'), 'acr')), '2017-03-01').passwords[0].value]"
+                        "value": "[listCredentials(resourceId(concat(parameters('environmentName'), '-shared'), 'Microsoft.ContainerRegistry/registries', concat(parameters('environmentname'), 'acr')), '2017-03-01').passwords[0].value]"
                     }
                 ]
 
