@@ -50,6 +50,26 @@
             "dependsOn": [
                 "Microsoft.Resources/deployments/linuxappserviceplan"
             ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "aspnetcoreapp",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('githuburl'),'gallery3.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters":{
+                    "environmentName": {
+                        "value": "[parameters('environmentName')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "Microsoft.Resources/deployments/linuxappserviceplan"
+            ]
         }
     ],
     "outputs": {
