@@ -53,7 +53,7 @@
         },
         {
             "apiVersion": "2017-05-10",
-            "name": "aspnetcoreapp",
+            "name": "gallery3",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
